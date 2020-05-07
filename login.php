@@ -30,7 +30,6 @@
 		</div>
 		<p>
 			Not yet a member? <a href="register.php">Sign up</a><br>
-			Discussion on topics <a href="/forum/">Forum</a>
 		</p>
 	</form>
 
