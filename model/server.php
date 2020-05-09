@@ -51,7 +51,7 @@
 					$username = $firstname ." ". $lastname;
 					$_SESSION['username'] = $username;
 					$_SESSION['success'] = "You are now logged in";
-					header('location: index.php');
+					header('location: joinus.php');
 				}
 		} else {
 			while ($row = $results->fetch_assoc()) {
@@ -63,7 +63,7 @@
 			$_SESSION['email'] = $email;
 			$_SESSION['olduser'] = true;
 			$_SESSION['success'] = "Welcome back mate $username";
-			header('location: index.php');
+			header('location: joinus.php');
 		}
 	}
 	// ... 
@@ -95,7 +95,7 @@
 			if (mysqli_num_rows($results) == 1) {
 				$_SESSION['username'] = $username;
 				$_SESSION['success'] = "You are now logged in";
-				header('location: index.php');
+				header('location: joinus.php');
 			}else {
 				array_push($errors, "Wrong username/password combination");
 			}
