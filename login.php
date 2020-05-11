@@ -1,12 +1,7 @@
-<?php include('model/server.php') ?>
+
+
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Indian Seafarer Login</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
-	<link rel="stylesheet" type="text/css" href="style/style.css">
-</head>
 <body>
 
 	<div class="header">

@@ -4,10 +4,10 @@
 }
 body {
 	font-size: 100%;
-	background-image: url('BGimage.png');
+	background:  url('BGimage.png'),linear-gradient(to right, rgba(109, 179, 242, .6), rgba(109, 179, 242, .6)) ;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-size: contain;
+	background-size: cover;
 
 }
 .container-fluid {
