@@ -6,24 +6,24 @@ session_start();
 	$indosno = "";
 	$dob = "";
 	$email    = "";
-	$errors = array(); 
+	$errors = array();
 	$_SESSION['success'] = "";
 	$_SESSION['olduser'] = false;
 
 	// connect to database
-    include('db_conn.php');
+    require('db_conn.php');
 
 
 	// REGISTER USER
 	if (isset($_POST['reg_user'])) {
 		// receive all input values from the form
-		$firstname = mysqli_real_escape_string($db, $_POST['firstname']);
-		$lastname = mysqli_real_escape_string($db, $_POST['lastname']);
-		$indosno = mysqli_real_escape_string($db, $_POST['indosno']);
-		$dob = mysqli_real_escape_string($db, $_POST['dob']);
-		$email = mysqli_real_escape_string($db, $_POST['email']);
-		$password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-		$password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
+		$firstname =htmlspecialchars($_POST['firstname']);
+		$lastname = htmlspecialchars($_POST['lastname']);
+		$indosno = htmlspecialchars($_POST['indosno']);
+		$dob = htmlspecialchars($_POST['dob']);
+		$email = htmlspecialchars($_POST['email']);
+		$password_1 = htmlspecialchars($_POST['password_1']);
+		$password_2 = htmlspecialchars($_POST['password_2']);
 
 		// form validation: ensure that the form is correctly filled
 		if (empty($firstname)) { array_push($errors, "Firstname is required"); }
@@ -37,20 +37,29 @@ session_start();
 			array_push($errors, "The two passwords do not match");
 		}
 
-		// check user exists in the DB 
-		$query = "SELECT * FROM user WHERE email='$email'";
-		$results = mysqli_query($db, $query);
-		if (mysqli_num_rows($results) == 0) {
+		// check user exists in the DB
+		$stmt =$db->prepare("SELECT * FROM user WHERE email=?");
+		$stmt->bimd_param("s", $email);
+      	        $stmt->execute;
+      	        $results = $stmt->get_result();
+		if ($results->num_rows == 0) {
 				// register user if there are no errors in the form
-				if (count($errors) == 0) {
-					$password = md5($password_1); 
-					$query = "INSERT INTO user (firstname, lastname, indosno, dob, email, password) 
-							VALUES('$firstname', '$lastname', '$indosno', '$dob', '$email', '$password')";
-					mysqli_query($db, $query)or die(mysqli_error($db));
-					$username = $firstname ." ". $lastname;
-					$_SESSION['username'] = $username;
-					$_SESSION['success'] = "You are now logged in";
-					header('location: home.php');
+				$stmt->close();
+          		if (count($errors) == 0) {
+					$password = crypt($password_1, "d4");
+					$stmt1 = $db->prepare("INSERT INTO user (firstname, lastname, indosno, dob, email, password)
+							VALUES(?, ?, ?, ?, ?, ?)";
+                                         			$stmt1->bind_param("ssssss", $firstname, $lastname, $indosno, $dob, $email, $password);
+                                					if ($stmt1->execute()){
+                                                      	$stmt->close();
+                                                      $db->close();
+                                                    } else {
+                                                      	die("An unexpected error occured, try again later.");
+						$username = $firstname ." ". $lastname;
+						$_SESSION['username'] = $username;
+						$_SESSION['success'] = "You are now logged in";
+						header('location: home.php');
+                                                    }
 				}
 		} else {
 			while ($row = $results->fetch_assoc()) {
@@ -65,12 +74,12 @@ session_start();
 			header('location: index.php');
 		}
 	}
-	// ... 
+	// ...
 
 	// LOGIN USER
 	if (isset($_POST['login_user'])) {
-		$email = mysqli_real_escape_string($db, $_POST['email']);
-		$password = mysqli_real_escape_string($db, $_POST['password']);
+		$email = htmlspecialchars($_POST['email']);
+		$password = htmlspecialchars($_POST['password']);
 
 		if (empty($email)) {
 			array_push($errors, "Email is required");
@@ -80,23 +89,29 @@ session_start();
 		}
 
 		if (count($errors) == 0) {
-			$password = md5($password);
-			$query = "SELECT * FROM user WHERE email='$email' AND password='$password'";
-			$results = mysqli_query($db, $query);
+			$password = crypt($password, "d4");
+			$stmt = $db->prepare("SELECT * FROM user WHERE email=? AND password=?");
+          	$stmt->bimd_param("ss", $email, $password);
+          	$stmt->execute();
+			$results = $stmt->get_result();
 			 while ($row = $results->fetch_assoc()) {
 				$firstname = $row["firstname"];
 				$lastname = $row["lastname"];
 				$indosno = $row["indosno"];
 				$dob = $row["dob"];
-			 }	
+			 }
 			$username = $firstname ." ". $lastname;
 
-			if (mysqli_num_rows($results) == 1) {
-				$_SESSION['username'] = $username;
+			if ($results->num_rows($results) == 1) {
+				$stmt->close();
+              	$stmt->close();
+              	$_SESSION['username'] = $username;
 				$_SESSION['success'] = "You are now logged in";
 				header('location: index.php');
 			}else {
-				array_push($errors, "Wrong username/password combination");
+				$stmt->close();
+              	$db->close();
+              array_push($errors, "Wrong username/password combination");
 			}
 		}
 	}
