@@ -39,21 +39,22 @@ session_start();
 
 		// check user exists in the DB
 		$stmt =$db->prepare("SELECT * FROM user WHERE email=?");
-		$stmt->bimd_param("s", $email);
-      	        $stmt->execute;
-      	        $results = $stmt->get_result();
+		$stmt->bind_param("s", $email);
+      	$stmt->execute;
+      	$results = $stmt->get_result();
 		if ($results->num_rows == 0) {
 				// register user if there are no errors in the form
 				$stmt->close();
           		if (count($errors) == 0) {
 					$password = crypt($password_1, "d4");
-					$stmt1 = $db->prepare("INSERT INTO user (firstname, lastname, indosno, dob, email, password)
-							VALUES(?, ?, ?, ?, ?, ?)";
+					$stmt1 = $db->prepare("INSERT INTO user (firstname, lastname, indosno, dob, email, password)VALUES(?, ?, ?, ?, ?, ?)");
                                          			$stmt1->bind_param("ssssss", $firstname, $lastname, $indosno, $dob, $email, $password);
                                 					if ($stmt1->execute()){
-                                                      	$stmt->close();
+                                                      	$stmt1->close();
                                                       $db->close();
-                                                    } else {
+              			//redirect to login
+                                                      echo "<script>alert('You are now successfully registered! You may now log in.');</script>";
+						                                               } else {
                                                       	die("An unexpected error occured, try again later.");
 						$username = $firstname ." ". $lastname;
 						$_SESSION['username'] = $username;
@@ -91,7 +92,7 @@ session_start();
 		if (count($errors) == 0) {
 			$password = crypt($password, "d4");
 			$stmt = $db->prepare("SELECT * FROM user WHERE email=? AND password=?");
-          	$stmt->bimd_param("ss", $email, $password);
+          	$stmt->bind_param("ss", $email, $password);
           	$stmt->execute();
 			$results = $stmt->get_result();
 			 while ($row = $results->fetch_assoc()) {
@@ -102,7 +103,7 @@ session_start();
 			 }
 			$username = $firstname ." ". $lastname;
 
-			if ($results->num_rows($results) == 1) {
+			if ($results->num_rows == 1) {
 				$stmt->close();
               	$stmt->close();
               	$_SESSION['username'] = $username;
