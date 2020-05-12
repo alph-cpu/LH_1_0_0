@@ -47,8 +47,7 @@ session_start();
 				$stmt->close();
           		if (count($errors) == 0) {
 					$password = crypt($password_1, "d4");
-					$stmt1 = $db->prepare("INSERT INTO user (firstname, lastname, indosno, dob, email, password)
-							VALUES(?, ?, ?, ?, ?, ?)";
+					$stmt1 = $db->prepare("INSERT INTO user (firstname, lastname, indosno, dob, email, password)VALUES(?, ?, ?, ?, ?, ?)");
                                          			$stmt1->bind_param("ssssss", $firstname, $lastname, $indosno, $dob, $email, $password);
                                 					if ($stmt1->execute()){
                                                       	$stmt1->close();
