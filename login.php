@@ -1,7 +1,8 @@
+<?php include('model/server.php');
+include ('header.php');
+?>
+    <title>Lighthouse-Login</title>
 
-
-<!DOCTYPE html>
-<html>
 <body>
 
 	<div class="header">
