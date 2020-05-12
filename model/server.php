@@ -39,9 +39,9 @@ session_start();
 
 		// check user exists in the DB
 		$stmt =$db->prepare("SELECT * FROM user WHERE email=?");
-		$stmt->bimd_param("s", $email);
-      	        $stmt->execute;
-      	        $results = $stmt->get_result();
+		$stmt->bind_param("s", $email);
+      	$stmt->execute;
+      	$results = $stmt->get_result();
 		if ($results->num_rows == 0) {
 				// register user if there are no errors in the form
 				$stmt->close();
@@ -51,7 +51,7 @@ session_start();
 							VALUES(?, ?, ?, ?, ?, ?)";
                                          			$stmt1->bind_param("ssssss", $firstname, $lastname, $indosno, $dob, $email, $password);
                                 					if ($stmt1->execute()){
-                                                      	$stmt->close();
+                                                      	$stmt1->close();
                                                       $db->close();
                                                     } else {
                                                       	die("An unexpected error occured, try again later.");
