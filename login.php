@@ -34,8 +34,6 @@
 			Not yet a member? <a href="register.php">Sign up</a><br>
 		</p>
 	</form>
-
-
-</body>
+ </body>
 </html>
 <?php } ?>
