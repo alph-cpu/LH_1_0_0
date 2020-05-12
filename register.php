@@ -1,4 +1,10 @@
-<?php include('model/server.php') ?>
+<?php
+	session_start();
+	if(isset($_SESSION['username'])){
+		header("location:index.php");
+    } else {
+      session_destroy();
+      require('model/server.php'); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +34,7 @@
 	<div class="header">
 		<h2>Indian Seafarer SignUp</h2>
 	</div>
-	
+
 	<form method="post" action="register.php">
 
 		<?php include('errors.php'); ?>
@@ -70,3 +76,5 @@
 	</form>
 </body>
 </html>
+
+<?php } ?>
