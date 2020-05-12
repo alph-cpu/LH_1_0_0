@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(isset($_SESSION['username'])){
+		header("location:index.php");
+    } else {
+      session_destroy();
+ ?>
 
 
 <!DOCTYPE html>
@@ -7,8 +14,8 @@
 	<div class="header">
 		<h2>Indian Seafarer Login</h2>
 	</div>
-	
-	<form method="post" action="login.php">
+
+	<form method="post" action="model/server.php">
 
 		<?php include('errors.php'); ?>
 
@@ -31,3 +38,4 @@
 
 </body>
 </html>
+<?php } ?>
