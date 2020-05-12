@@ -52,7 +52,9 @@ session_start();
                                 					if ($stmt1->execute()){
                                                       	$stmt1->close();
                                                       $db->close();
-                                                    } else {
+              			//redirect to login
+                                                      echo "<script>alert('You are now successfully registered! You may now log in.');</script>";
+						header("location:login.php");                                                  } else {
                                                       	die("An unexpected error occured, try again later.");
 						$username = $firstname ." ". $lastname;
 						$_SESSION['username'] = $username;
@@ -90,7 +92,7 @@ session_start();
 		if (count($errors) == 0) {
 			$password = crypt($password, "d4");
 			$stmt = $db->prepare("SELECT * FROM user WHERE email=? AND password=?");
-          	$stmt->bimd_param("ss", $email, $password);
+          	$stmt->bind_param("ss", $email, $password);
           	$stmt->execute();
 			$results = $stmt->get_result();
 			 while ($row = $results->fetch_assoc()) {
@@ -101,7 +103,7 @@ session_start();
 			 }
 			$username = $firstname ." ". $lastname;
 
-			if ($results->num_rows($results) == 1) {
+			if ($results->num_rows == 1) {
 				$stmt->close();
               	$stmt->close();
               	$_SESSION['username'] = $username;
