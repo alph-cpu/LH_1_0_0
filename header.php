@@ -27,7 +27,8 @@
                <?php if (!isset($_SESSION['username'])) {   ?>
                    <a class="btn btn-primary" href="register.php">Join Us</a>
               <?php } else {    ?>
-                   <a class="btn btn-primary" href="home.php?logout='1'">logout</a>
+<!--                   <a class="btn btn-primary" href="home.php?logout='1'">logout</a>-->
+                   <a class="btn btn-primary" href="home.php">logout</a>
               <?php }  ?>
 
             </ul>
