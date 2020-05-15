@@ -40,7 +40,7 @@ session_start();
 		// check user exists in the DB
 		$stmt =$db->prepare("SELECT * FROM user WHERE email=?");
 		$stmt->bind_param("s", $email);
-      	$stmt->execute;
+      	$stmt->execute();
       	$results = $stmt->get_result();
 		if ($results->num_rows == 0) {
 				// register user if there are no errors in the form

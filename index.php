@@ -11,9 +11,9 @@ include ('header.php');
 <title>Lighthouse-Home</title>
 <body>
 <?php if (!isset($_SESSION['username'])) {
-    echo $_SESSION['success'];
+
  } else {
-print_r($_SESSION);
+
  }  ?>
 
 </body>

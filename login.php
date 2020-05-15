@@ -4,6 +4,7 @@
 		header("location:index.php");
     } else {
       session_destroy();
+      require('model/server.php');
       include ('header.php');
  ?>
         <title>Lighthouse-Login</title>
@@ -13,7 +14,7 @@
 		<h2>Indian Seafarer Login</h2>
 	</div>
 
-	<form method="post" action="model/server.php">
+	<form method="post" action="login.php">
 
 		<?php include('errors.php'); ?>
 
