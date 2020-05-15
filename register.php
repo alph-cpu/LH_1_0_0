@@ -48,7 +48,7 @@ include ('header.php');
 		  <input type="password" name="password_2">
 		</div>
 		<div class="input-group">
-		  <button type="submit" class="btn" name="reg_user">Register</button>
+		  <button type="submit" class="btn btn-success" name="reg_user">Register</button>
 		</div>
 		<p>
 			Already a member? <a href="/">Sign in</a>
