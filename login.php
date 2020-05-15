@@ -4,11 +4,9 @@
 		header("location:index.php");
     } else {
       session_destroy();
+      include ('header.php');
  ?>
-
-
-<!DOCTYPE html>
-<html>
+        <title>Lighthouse-Login</title>
 <body>
 
 	<div class="header">
