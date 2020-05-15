@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 	// variable declaration
 	$firstname = "";
 	$lastname = "";
@@ -7,7 +8,7 @@ session_start();
 	$dob = "";
 	$email    = "";
 	$errors = array(); 
-	$_SESSION['success'] = "";
+	$_SESSION['success'] = "Water";
 	$_SESSION['olduser'] = false;
 
 	// connect to database
@@ -50,7 +51,7 @@ session_start();
 					$username = $firstname ." ". $lastname;
 					$_SESSION['username'] = $username;
 					$_SESSION['success'] = "You are now logged in";
-					header('location: home.php');
+					header('location: index.php');
 				}
 		} else {
 			while ($row = $results->fetch_assoc()) {
