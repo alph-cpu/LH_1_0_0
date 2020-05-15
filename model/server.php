@@ -54,7 +54,7 @@ session_start();
                                                       $db->close();
               			//redirect to login
                                                       echo "<script>alert('You are now successfully registered! You may now log in.');</script>";
-						                                               } else {
+													} else {
                                                       	die("An unexpected error occured, try again later.");
 						$username = $firstname ." ". $lastname;
 						$_SESSION['username'] = $username;

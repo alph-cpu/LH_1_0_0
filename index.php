@@ -13,7 +13,7 @@ include ('header.php');
 <?php if (!isset($_SESSION['username'])) {
 
  } else {
-
+    header('location: temp.php');
  }  ?>
 
 </body>
