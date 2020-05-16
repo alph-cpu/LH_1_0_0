@@ -4,11 +4,37 @@
 }
 body {
 	font-size: 100%;
-	background:  url('BGimage.png'),linear-gradient(to right, rgba(109, 179, 242, .6), rgba(109, 179, 242, .6)) ;
+	background:  url('BGimage.png'),linear-gradient(45deg, rgba(6, 2, 81, 0.9), rgba(89, 179, 242, .7)) ;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
 
+}
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content-seg {height: 450px}
+
+/* Set gray background color and 100% height */
+.sidenav {
+	padding-top: 20px;
+	/*background-color: #f1f1f1;*/
+	height: 100%;
+}
+
+/* Set black background color, white text and some padding
+footer {
+	background-color: #555;
+	color: white;
+	padding: 15px;
+}
+ */
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+	.sidenav {
+		height: auto;
+		padding: 15px;
+	}
+	.row.content-seg {height:auto;}
 }
 .container-fluid {
 	width: 100%;

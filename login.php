@@ -7,11 +7,11 @@
       require('model/server.php');
       include ('header.php');
  ?>
-        <title>Lighthouse-Login</title>
+        <title>Lighthouse Login</title>
 <body>
 
 	<div class="header">
-		<h2>Indian Seafarer Login</h2>
+		<h2>Lighthouse Login</h2>
 	</div>
 
 	<form method="post" action="login.php">

@@ -17,21 +17,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Forum </a>
+                    <a class="nav-link font-weight-bold" href="#">EXAM ASSIST</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link font-weight-bold" href="#">CAREER</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link font-weight-bold" href="#">E-LEARNING</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-               <?php if (!isset($_SESSION['username'])) {   ?>
-                   <a class="btn btn-primary" href="register.php">Join Us</a>
-              <?php } else {    ?>
-<!--                   <a class="btn btn-primary" href="home.php?logout='1'">logout</a>-->
-                   <a class="btn btn-primary" href="home.php">logout</a>
-              <?php }  ?>
-
+<!--                <input type="search" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+                <?php if (!isset($_SESSION['username'])) {   ?>
+                    <a class="btn btn-outline-primary" href="login.php">Login</a>
+                <?php } ?>
+                <?php if (!isset($_SESSION['username'])) {   ?>
+                    <a class="btn btn-primary" href="register.php">Join Us</a>
+                <?php } else {    ?>
+                    <a class="btn btn-primary" href="home.php">logout</a>
+                <?php }  ?>
             </ul>
+<!--            <form class="form-inline">-->
+<!--                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+<!--            </form>-->
         </div>
     </nav>
 </head>

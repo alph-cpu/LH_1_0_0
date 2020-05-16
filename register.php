@@ -8,11 +8,11 @@ require('model/server.php');
 include ('header.php');
 ?>
 
-    <title>Indian Seafarer Signup</title>
+    <title>Lighthouse SignUp</title>
 
 <body>
 	<div class="header">
-		<h2>Indian Seafarer SignUp</h2>
+		<h2>Lighthouse SignUp</h2>
 	</div>
 	
 	<form method="post" action="register.php">
