@@ -6,7 +6,8 @@ include ('header.php');
 
 <title>Lighthouse-Home</title>
 <body>
-<?php if (!isset($_SESSION['username'])) {
+<?php session_start();
+    if (!isset($_SESSION['username'])) {
     header('location: intro.php');
  } else {
     header('location: intro.php');
