@@ -25,7 +25,8 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-               <?php if (!isset($_SESSION['username'])) {   ?>
+               <?php session_start();
+                   if (!isset($_SESSION['username'])) {   ?>
                    <a class="btn btn-primary" href="register.php">Join Us</a>
               <?php } else {    ?>
                    <a class="btn btn-primary" href="home.php?logout='1'">logout</a>
